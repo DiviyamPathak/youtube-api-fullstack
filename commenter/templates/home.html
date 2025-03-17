@@ -3,6 +3,30 @@
 {% block title %}comments{% endblock %}
 
 {% block content %}
-    <h1>Welcome to My Django App</h1>
-    <p>This is the home page content.</p>
+<!-- <pre>{{ comments }}</pre> -->
+
+<!-- Loop through comments and display -->
+<div class="max-w-2xl mx-auto mt-8 p-6 bg-gray-100 shadow-lg rounded-lg">
+    <h1 class="text-3xl font-bold mb-6 text-gray-900 border-b pb-2">Comments</h1>
+
+    {% for comment in comments %}
+    <div class="flex items-start space-x-4 p-5 mb-4 bg-white shadow-md rounded-lg border border-gray-300">
+        <!-- Profile Image -->
+        <img class="w-14 h-14 rounded-full border-2 border-blue-500" 
+             src="{{ comment.authorProfileImageUrl }}" 
+             alt="{{ comment.authorDisplayName }}'s Profile Picture">
+
+        <!-- Comment Content -->
+        <div class="flex-1">
+            <p class="text-lg font-bold text-gray-800">{{ comment.authorDisplayName }}</p>
+            <p class="text-gray-700 text-base leading-relaxed">{{ comment.textOriginal }}</p>
+            <p class="text-sm text-gray-600 mt-2">👍 <span class="font-medium">{{ comment.likeCount }}</span> Likes</p>
+        </div>
+    </div>
+    {% empty %}
+    <p class="text-center text-gray-600 mt-6">No comments found.</p>
+    {% endfor %}
+</div>
+
+
 {% endblock %}

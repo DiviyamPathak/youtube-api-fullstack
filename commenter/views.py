@@ -21,12 +21,24 @@ def ListTopLevelComments():
         videoId=Vidid
     )
     response = request.execute()
+    return response
 
-    print(response)
 
-
-ListTopLevelComments()
 apikey = settings.YT_API_KEY
 def home(request):
-	
-	return render(request,'home.html')
+	commentdata=ListTopLevelComments()
+
+	comments = []
+	for item in commentdata.get("items", []):
+	    comment_data = item["snippet"]["topLevelComment"]["snippet"]
+	    comments.append(
+	        {
+	            "textOriginal": comment_data["textOriginal"],
+	            "authorDisplayName": comment_data["authorDisplayName"],
+	            "likeCount": comment_data["likeCount"],
+	            "authorProfileImageUrl": comment_data["authorProfileImageUrl"],
+	        }
+	    )    
+
+	# print(comments)
+	return render(request,'home.html', {"comments": comments})
