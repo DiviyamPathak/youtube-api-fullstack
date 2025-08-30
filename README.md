@@ -1,6 +1,7 @@
-# youtube api fullstack app 
-Using youtube's api to comment and 
-can be turned into Social media manager project
-for cactro hiring
-Video
-https://youtube.com/shorts/2dzacUIKbCc?feature=share
+# Social Media management  
+This Webapp allows for single window for managing multiple social account.
+Can be used for Posting , Interacting and Outreach Performance
+Many more features to be added
+
+## Sign-up
+Users can login into using Oauth 
