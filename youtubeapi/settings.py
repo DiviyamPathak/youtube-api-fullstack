@@ -21,6 +21,9 @@ BASE_DIR = Path(__file__).resolve().parent.parent
 # See https://docs.djangoproject.com/en/5.1/howto/deployment/checklist/
 YT_API_KEY=str(os.getenv('API_KEY'))
 VIDEO_ID=str(os.getenv('VIDEO_URL_ID'))
+# x_clientid=str(os.getenv('X_CLIENT_ID'))
+# x_clientsec=str(os.getenv('X_CLIENT_SECRET'))
+djkey=str(os.getenv('DJKEY'))
 
 # SECURITY WARNING: keep the secret key used in production secret!
 SECRET_KEY = 'django-insecure-di57864td52zoe%ce1@#b6fc*@y#wkmkk5joi^v*^+_+f=f1$b'
@@ -28,9 +31,16 @@ SECRET_KEY = 'django-insecure-di57864td52zoe%ce1@#b6fc*@y#wkmkk5joi^v*^+_+f=f1$b
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
 
-ALLOWED_HOSTS = []
+ALLOWED_HOSTS = [
+    '127.0.0.1',
+    'localhost',
+    "6bc636fbc1b8.ngrok-free.app"
+    ]
 
-
+CSRF_TRUSTED_ORIGINS = [
+    "https://6bc636fbc1b8.ngrok-free.app"
+]
+SITE_ID = 1
 # Application definition
 
 INSTALLED_APPS = [
@@ -40,6 +50,13 @@ INSTALLED_APPS = [
     'django.contrib.sessions',
     'django.contrib.messages',
     'django.contrib.staticfiles',
+    'authpltfrm',
+    'allauth',
+    'allauth.account',
+    # Optional -- requires install using `django-allauth[socialaccount]`.
+    'allauth.socialaccount',
+    # ... include the providers you want to enable:
+    "allauth.socialaccount.providers.twitter",  
 ]
 
 MIDDLEWARE = [
@@ -50,6 +67,7 @@ MIDDLEWARE = [
     'django.contrib.auth.middleware.AuthenticationMiddleware',
     'django.contrib.messages.middleware.MessageMiddleware',
     'django.middleware.clickjacking.XFrameOptionsMiddleware',
+    "allauth.account.middleware.AccountMiddleware",
 ]
 
 ROOT_URLCONF = 'youtubeapi.urls'
@@ -57,7 +75,7 @@ ROOT_URLCONF = 'youtubeapi.urls'
 TEMPLATES = [
     {
         'BACKEND': 'django.template.backends.django.DjangoTemplates',
-        'DIRS': ["/mnt/storage1/projects2/youtubeapi/commenter/templates"],
+        'DIRS': [],
         'APP_DIRS': True,
         'OPTIONS': {
             'context_processors': [
@@ -69,6 +87,7 @@ TEMPLATES = [
         },
     },
 ]
+
 
 WSGI_APPLICATION = 'youtubeapi.wsgi.application'
 
@@ -83,6 +102,31 @@ DATABASES = {
     }
 }
 
+# SOCIALACCOUNT_PROVIDERS ={
+#     "twitter":  {
+#         # For each OAuth based provider, either add a ``SocialApp``
+#         # (``socialaccount`` app) containing the required client
+#         # credentials, or list them here:
+#         "APPS": [
+#             {
+#                 "client_id":x_clientid ,
+#                 "secret": x_clientsec,
+#                 "key": "",
+#                 "settings": {
+#                     # You can fine tune these settings per app:
+#                     "scope": [
+#                         "profile",
+#                         "email",
+#                     ],
+#                     "auth_params": {
+#                         "access_type": "online",
+#                     },
+#                 },
+#             },
+#         ],
+
+#     }
+# }
 
 # Password validation
 # https://docs.djangoproject.com/en/5.1/ref/settings/#auth-password-validators
